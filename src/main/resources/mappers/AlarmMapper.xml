@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.ceos.caloringmvp.model.AlarmRepository">
+
+    <insert id="saveAttackAlarm">
+        insert into alarm
+        (event,user_id,friend_user_id,caloring,updateAt)
+        values
+        (2,#{friend_user_id},#{user_id},#{exercising},now())
+    </insert>
+    <insert id="savePenalAlarm">
+        insert into alarm
+        (event,user_id,friend_user_id,caloring,updateAt)
+        values
+        (0,#{user_id},1, 100-#{exercising} , now())
+    </insert>
+    <insert id="saveFriendAlarm">
+        insert into alarm
+        (event,user_id,friend_user_id,caloring,updateAt)
+        values
+        (1,#{user_id},#{friend_user_id},0,now()) ,(1,#{friend_user_id},#{user_id},0,now())
+    </insert>
+
+
+    <select id="findByAlarmId" resultType="dev.ceos.caloringmvp.model.Alarm">
+        select * from alarm
+        where user_id=#{friend_user_id} and friend_user_id = #{user_id} and event=2
+    </select>
+
+    <select id="findAlarmList" resultType="dev.ceos.caloringmvp.model.Alarm">
+        select * from alarm
+        where user_id = #{user_id}
+    </select>
+
+</mapper>

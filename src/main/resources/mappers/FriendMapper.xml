@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.ceos.caloringmvp.model.FriendRepository">
+
+    <!--친구 검색 결과 친구 뜨는거-->
+    <select id="findFriend" resultType="dev.ceos.caloringmvp.controller.vo.FriendResponse">
+        SELECT user_id,name, exercising, total_caloring, level
+        FROM user where name=#{name}
+    </select>
+
+    <insert id="createFriend" parameterType="dev.ceos.caloringmvp.controller.vo.UserTwoVO">
+        INSERT INTO friend(friend_user_id,user_id)
+        values (#{friend_user_id},#{user_id}),
+               (#{user_id} , #{friend_user_id})
+    </insert>
+
+<!--친구 삭제시 친구목록에서 삭제할 친구 찾음-->
+    <delete id="deleteFriend">
+        DELETE FROM friend WHERE (friend_user_id = #{friend_user_id} and user_id = #{user_id}),
+                                 (user_id = #{friend_user_id} and friend_user_id = #{user_id})
+    </delete>
+
+    <select id="friends" resultType="dev.ceos.caloringmvp.controller.vo.FriendResponse">
+        SELECT  f_info.user_id,f_info.name,f_info.exercising, f_info.total_caloring, f_info.level
+        FROM user AS f_info
+        JOIN friend AS f_id
+        ON f_info.user_id = f_id.friend_user_id
+        WHERE f_id.user_id=#{user_id}
+        ORDER by f_info.exercising desc
+    </select>
+
+    <select id="findById" resultType="dev.ceos.caloringmvp.model.Friend">
+        SELECT user_id
+        FROM friend
+        WHERE user_id=#{user_id}
+    </select>
+    <select id="aleadyCheck" resultType="dev.ceos.caloringmvp.controller.vo.UserTwoVO">
+        select * from friend
+        where user_id=#{user_id} and friend_user_id =#{friend_user_id}
+    </select>
+
+
+</mapper>

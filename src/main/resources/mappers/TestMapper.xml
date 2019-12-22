@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.ceos.caloringmvp.test.CaloringRepository">
+
+
+    <select id="findById" parameterType="long" resultType="dev.ceos.caloringmvp.test.Caloring">
+        SELECT id,name,exercising,goal,caloring,fat
+        FROM caloring
+        WHERE id=#{id}
+    </select>
+
+    <update id="updateCalor" parameterType="dev.ceos.caloringmvp.test.Caloring">
+        update caloring set
+        name =#{name},
+        exercising =#{exercising},
+        goal =#{goal},
+        caloring =#{caloring}
+        where id = #{id}
+    </update>
+
+    <update id="attack" parameterType="dev.ceos.caloringmvp.test.Caloring">
+        update caloring set
+        fat = fat+1
+        where id = #{id}
+    </update>
+
+    <update id="reset" parameterType="dev.ceos.caloringmvp.test.Caloring">
+        update caloring set
+        exercising = 0,
+        caloring = 0
+        where id = #{id}
+    </update>
+
+</mapper>

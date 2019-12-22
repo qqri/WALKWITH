@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.ceos.caloringmvp.model.UserRepository">
+    <insert id="signInUser" parameterType="dev.ceos.caloringmvp.model.User">
+        INSERT INTO user
+        (user_id, name, password, updateAt, exercising, attacked_caloring,total_caloring,level,age,gender)
+        values
+        (null,#{name}, #{password}, now(), 0, 0, 0,1, #{age}, #{gender})
+    </insert>
+
+
+
+    <update id="attack">
+        update caloring set
+        fat = fat + attackCaloring;
+        where user_id = #{user_id}
+    </update>
+
+    <update id="updateExer">
+        update user set
+        exercising = #{exercising}, updateAt=now(),level=#{level},total_caloring=#{total_caloring}
+        where user_id = #{user_id}
+    </update>
+
+    <update id="attackFriend">
+        update user set
+        attacked_caloring = attacked_caloring + #{attackExercising}
+        where user_id = #{friend_user_id}
+    </update>
+
+    <update id="updateCalor">
+        update user set
+        total_caloring = #{total_caloring},
+        attacked_caloring = 0
+        where user_id=#{user_id}
+    </update>
+
+
+    <!--친구 아이디 찾기-->
+    <select id="findById" resultType="dev.ceos.caloringmvp.model.User">
+        SELECT * FROM user
+        WHERE user_id = #{user_id}
+    </select>
+
+    <select id="findById2" resultType="dev.ceos.caloringmvp.controller.vo.UserExerVO">
+        SELECT user_id,exercising,updateAt,level,total_caloring
+        FROM user
+        WHERE user_id = #{user_id}
+    </select>
+
+    <select id="duplicateIdCheck" resultType="dev.ceos.caloringmvp.model.User">
+        select * from user
+        where name=#{name}
+    </select>
+
+    <select id="findByname" parameterType="String" resultType="dev.ceos.caloringmvp.model.User">
+        SELECT * FROM user
+        WHERE name=#{name}
+    </select>
+
+    <select id="loginCheck" resultType="dev.ceos.caloringmvp.model.User">
+        SELECT * from user
+        WHERE name=#{name} AND password=#{password}
+    </select>
+
+    <select id="findName2" resultType="java.lang.String">
+        SELECT * FROM user
+        WHERE name=#{name}
+    </select>
+
+    <select id="findByName3" resultType="dev.ceos.caloringmvp.model.User">
+        SELECT * FROM user
+        WHERE name=#{name}
+    </select>
+
+    <select id="loginUser" resultType="dev.ceos.caloringmvp.model.User">
+        SELECT * FROM user
+        WHERE user_id = #{user_id}
+    </select>
+    <select id="aleadyCheck" resultType="dev.ceos.caloringmvp.controller.vo.UserTwoVO"></select>
+
+</mapper>
