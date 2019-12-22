@@ -49,7 +49,7 @@ public class CaloringController {
     *
     * 업뎃되는 양은
     * 한번씩만되도록 -> 알람 테이블에 접근해서 확인한다.
-    * 받아온 값들을 각각의 레포에다 잘 저장 하면 됨... 인뎅...
+    * 받아온 값들을 각각의 레포에다 잘 저장 하면 됨... 인데..
     *
     * */
     @PatchMapping("/exercising/attack")  //user_id = 나 , friend_user_id = 공격할 친구
@@ -57,19 +57,19 @@ public class CaloringController {
 
         Alarm check = alarmRepository.findByAlarmId(friendAttackVO);
         if(check != null) //알람이 이미 존재하는지 확인함. > null 이 아니란건 이미 존재한단 거니까 끝내버림
-        { return  new ResponseEntity<>(new ResponseVO("error : already attack"),HttpStatus.OK); }
+        { return  new ResponseEntity<>(new ResponseVO("warning : already attack"),HttpStatus.OK); }
 
         long friend_user_id = friendAttackVO.getFriend_user_id();
         User attackCheck = userRepository.findById(friend_user_id);
         if(attackCheck.getAttack_caloring()>150) {
-            return new ResponseEntity<>(new ResponseVO("error : attack caloring over 150"),HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseVO("warning : attack caloring over 150"),HttpStatus.OK);
         }
 
         userRepository.attackFriend(friendAttackVO);
         alarmRepository.saveAttackAlarm(friendAttackVO);
         //alarm 테이블에 event code, my_id, you_id, caloring값, date 값 쌓임.
 
-        return new ResponseEntity<>(new ResponseVO("attack success"),HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseVO("success : attack success"),HttpStatus.OK);
 
     }
 
@@ -86,7 +86,7 @@ public class CaloringController {
         initVO.updateTotalCalor();
         userRepository.updateCalor(initVO);
         alarmRepository.savePenalAlarm(initVO);
-        return new ResponseEntity<>(new ResponseVO("update penalty success"),HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseVO("success : update penalty success"),HttpStatus.OK);
     }
 
 

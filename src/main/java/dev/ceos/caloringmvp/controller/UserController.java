@@ -35,7 +35,7 @@ public class UserController {
         User check = userRepository.duplicateIdCheck(user);
 
         if(check != null) {
-            return new ResponseEntity<>(new ResponseVO("duplicate id"),HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseVO("warning : duplicate id"),HttpStatus.OK);
         }
 
         userRepository.signInUser(user);
@@ -54,7 +54,7 @@ public class UserController {
         User loginUser = userRepository.loginCheck(user);
 
         if(loginUser == null) {
-            return ResponseEntity.ok("error : name,pw  incorrect ");
+            return ResponseEntity.ok("warning :  name,pw  incorrect ");
         }
         return new ResponseEntity<>(loginUser,HttpStatus.OK);
     }

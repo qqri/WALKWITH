@@ -55,6 +55,7 @@ public class FriendController {
     /**
      * req body에 내id,친구id
      * 양방향으로 둘다 저장된다!
+     * 친구 이름으로 검색하고 / 내 아이디랑 친구 이름이랑 같이 보내서
      *
      */
 
@@ -67,7 +68,7 @@ public class FriendController {
         friendRepository.createFriend(userTwoVO);
         alarmRepository.saveFriendAlarm(userTwoVO);
 
-        return new ResponseEntity<>(new ResponseVO("create friend success"),HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseVO("success : create friend success"),HttpStatus.OK);
     }
 
 
@@ -82,7 +83,7 @@ public class FriendController {
         friendRepository.deleteFriend(userTwoVO);
         alarmRepository.saveFriendDelAlarm(userTwoVO);
 
-        return new ResponseEntity<>(new ResponseVO("delete friend success"),HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseVO("warning : delete friend success"),HttpStatus.OK);
     }
 
     /* cdn 오류-해결
