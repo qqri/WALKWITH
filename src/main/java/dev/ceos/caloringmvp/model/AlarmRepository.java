@@ -15,4 +15,6 @@ public interface AlarmRepository {
     void savePenalAlarm(InitVO initVO);
 
     void saveFriendAlarm(UserTwoVO userTwoVO);
+
+    void saveFriendDelAlarm(UserTwoVO userTwoVO);
 }

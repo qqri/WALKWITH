@@ -74,11 +74,13 @@ public class FriendController {
     /**
      * >양방향 삭제
      * 친구 삭제
+     * 이벤트 코드 3번
      */
     @DeleteMapping("/friend/delete")
     public ResponseEntity<?> delecteFriend(@RequestBody UserTwoVO userTwoVO) {
 
         friendRepository.deleteFriend(userTwoVO);
+        alarmRepository.saveFriendDelAlarm(userTwoVO);
 
         return new ResponseEntity<>(new ResponseVO("delete friend success"),HttpStatus.OK);
     }

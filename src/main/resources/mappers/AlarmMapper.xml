@@ -24,6 +24,13 @@
         (1,#{user_id},#{friend_user_id},0,now()) ,(1,#{friend_user_id},#{user_id},0,now())
     </insert>
 
+    <insert id="saveFriendDelAlarm">
+        insert into alarm
+        (event,user_id,friend_user_id,caloring,updateAt)
+        values
+        (3,#{user_id},#{friend_user_id},0,now()) ,(3,#{friend_user_id},#{user_id},0,now())
+    </insert>
+
 
     <select id="findByAlarmId" resultType="dev.ceos.caloringmvp.model.Alarm">
         select * from alarm

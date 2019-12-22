@@ -19,7 +19,7 @@
 
 <!--친구 삭제시 친구목록에서 삭제할 친구 찾음-->
     <delete id="deleteFriend">
-        DELETE FROM friend WHERE (friend_user_id = #{friend_user_id} and user_id = #{user_id}),
+        DELETE FROM friend WHERE (friend_user_id = #{friend_user_id} and user_id = #{user_id}) or
                                  (user_id = #{friend_user_id} and friend_user_id = #{user_id})
     </delete>
 
