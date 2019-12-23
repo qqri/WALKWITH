@@ -15,7 +15,7 @@
         insert into alarm
         (event,user_id,friend_user_id,caloring,updateAt)
         values
-        (0,#{user_id},1, 100-#{exercising} , now())
+        (0,#{user_id},1, #{penalty} , now())
     </insert>
     <insert id="saveFriendAlarm">
         insert into alarm
@@ -34,12 +34,14 @@
 
     <select id="findByAlarmId" resultType="dev.ceos.caloringmvp.model.Alarm">
         select * from alarm
-        where user_id=#{friend_user_id} and friend_user_id = #{user_id} and event=2
+        where (user_id=#{friend_user_id}) and (friend_user_id = #{user_id}) and (event=2) and (updateAt=#{updateAt})
     </select>
 
-    <select id="findAlarmList" resultType="dev.ceos.caloringmvp.model.Alarm">
-        select * from alarm
-        where user_id = #{user_id}
+    <select id="findAlarmList" resultType="dev.ceos.caloringmvp.controller.vo.AlarmVO">
+        select user.name , alarm.event , alarm.updateAt , alarm.caloring
+        from user left join alarm
+        on alarm.friend_user_id = user.user_id
+        where alarm.user_id= #{user_id};
     </select>
 
 </mapper>

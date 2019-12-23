@@ -12,29 +12,23 @@
     </insert>
 
 
-
-    <update id="attack">
-        update caloring set
-        fat = fat + attackCaloring;
-        where user_id = #{user_id}
-    </update>
-
     <update id="updateExer">
         update user set
-        exercising = #{exercising}, updateAt=now(),level=#{level},total_caloring=#{total_caloring}
+        exercising = #{exercising}, level=#{level},total_caloring=#{total_caloring}
         where user_id = #{user_id}
     </update>
 
-    <update id="attackFriend">
+    <update id="attacked">
         update user set
-        attacked_caloring = attacked_caloring + #{attackExercising}
+        attacked_caloring = attacked_caloring + #{exercising}
         where user_id = #{friend_user_id}
     </update>
 
     <update id="updateCalor">
         update user set
         total_caloring = #{total_caloring},
-        attacked_caloring = 0
+        attacked_caloring = 0,
+        exercising=0
         where user_id=#{user_id}
     </update>
 
@@ -46,10 +40,18 @@
     </select>
 
     <select id="findById2" resultType="dev.ceos.caloringmvp.controller.vo.UserExerVO">
-        SELECT user_id,exercising,updateAt,level,total_caloring
+        SELECT user_id,exercising,attacked_caloring,level,total_caloring
         FROM user
         WHERE user_id = #{user_id}
     </select>
+
+    <select id="findById3" resultType="dev.ceos.caloringmvp.controller.vo.InitVO">
+        SELEcT user_id,exercising,attacked_caloring,level,total_caloring
+        FROM USER
+        WHERE user_id=#{user_id}
+    </select>
+
+
 
     <select id="duplicateIdCheck" resultType="dev.ceos.caloringmvp.model.User">
         select * from user
@@ -80,6 +82,7 @@
         SELECT * FROM user
         WHERE user_id = #{user_id}
     </select>
-    <select id="aleadyCheck" resultType="dev.ceos.caloringmvp.controller.vo.UserTwoVO"></select>
+
+
 
 </mapper>
