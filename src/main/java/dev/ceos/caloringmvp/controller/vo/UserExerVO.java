@@ -32,7 +32,7 @@ public class UserExerVO {
 
         total_caloring += exercising-preExer;
 
-        if( ((level)*200 <= total_caloring) && level <5) //패널티,공격으로 칼로링 깎인 사람은 레벨 증가 안함.
+        if( ((level)*200 <= total_caloring) && level <5)
         {
             level++;
         }
