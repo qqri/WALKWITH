@@ -21,7 +21,8 @@ public interface UserRepository {
 
     UserExerVO findById2(UserExerVO userExerVO);
 
-    InitVO findById3(UserInfoVO userInfoVO);
+    UserExerVO findById3(UserInfoVO userInfoVO);
+   // InitVO findById3(UserInfoVO userInfoVO);
 
 
 
@@ -34,7 +35,7 @@ public interface UserRepository {
 
     User loginUser(UserInfoVO userInfoVO);
 
-    void updateCalor(InitVO initVO);
+    void updateCalor(User initVO);
 
 
 }

@@ -45,8 +45,8 @@
         WHERE user_id = #{user_id}
     </select>
 
-    <select id="findById3" resultType="dev.ceos.caloringmvp.controller.vo.InitVO">
-        SELEcT user_id,exercising,attacked_caloring,level,total_caloring
+    <select id="findById3" resultType="dev.ceos.caloringmvp.controller.vo.UserExerVO">
+        SELECT user_id,exercising,attacked_caloring,level,total_caloring
         FROM USER
         WHERE user_id=#{user_id}
     </select>

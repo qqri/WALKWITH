@@ -91,11 +91,13 @@ public class CaloringController {
     @PostMapping("init/today/penalty")
     public ResponseEntity<?> initToday(@RequestBody UserInfoVO userInfoVO){
 
-        InitVO initVO = userRepository.findById3(userInfoVO);
-        initVO.updateTotalCalor();
+        User initVO = userRepository.loginUser(userInfoVO);
+        //UserExerVO initVO = userRepository.findById3(userInfoVO);
+         int penal = initVO.updateTodayCalor();
+         long user_id = initVO.getUser_id();
 
-        userRepository.updateCalor(initVO);
-        alarmRepository.savePenalAlarm(initVO);
+         userRepository.updateCalor(initVO);
+         alarmRepository.savePenalAlarm(user_id,penal);
 
         return new ResponseEntity<>(initVO , HttpStatus.OK);
     }

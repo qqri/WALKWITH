@@ -12,7 +12,8 @@ public interface AlarmRepository {
     //attack 당한 당사자의 id 값이 user_id 에 들어가고, attack 한 사람은 friend_id에 들어감.
     void saveAttackAlarm(FriendAttackVO friendAttackVO);
 
-    void savePenalAlarm(InitVO initVO);
+    void savePenalAlarm(long user_id, int penal);
+
 
     void saveFriendAlarm(UserTwoVO userTwoVO);
 

@@ -15,8 +15,9 @@
         insert into alarm
         (event,user_id,friend_user_id,caloring,updateAt)
         values
-        (0,#{user_id},1, #{penalty} , now())
+        (0,#{user_id},1, #{penal} , now())
     </insert>
+
     <insert id="saveFriendAlarm">
         insert into alarm
         (event,user_id,friend_user_id,caloring,updateAt)
