@@ -34,8 +34,10 @@ public class CaloringController {
     @PatchMapping("/exercising/update")
     public ResponseEntity<?> updateExer(@RequestBody UserExerVO userExerVO){
 
-        userExerVO.updateCaloring(userExerVO.getLevel());
+        UserExerVO preUserExerVO = userRepository.findById2(userExerVO);
+        int preExer = preUserExerVO.getExercising();
 
+        userExerVO.updateCaloring(preExer);
         userRepository.updateExer(userExerVO);
 
         UserExerVO newUserExerVO = userRepository.findById2(userExerVO);
@@ -61,11 +63,15 @@ public class CaloringController {
 
         long friend_user_id = friendAttackVO.getFriend_user_id();
         User attackCheck = userRepository.findById(friend_user_id);
-        if(attackCheck.getAttack_caloring()>150) {
+
+        if(attackCheck.getAttacked_caloring()>150) { //이미 공격 받은게 150 인거
             return new ResponseEntity<>(new ResponseVO("warning : attack caloring over 150"),HttpStatus.OK);
         }
 
-        userRepository.attackFriend(friendAttackVO);
+        else if(friendAttackVO.getExercising() + attackCheck.getAttacked_caloring() >= 150 )
+        {friendAttackVO.setExercising( 150-attackCheck.getAttacked_caloring() ); }
+
+        userRepository.attacked(friendAttackVO);
         alarmRepository.saveAttackAlarm(friendAttackVO);
         //alarm 테이블에 event code, my_id, you_id, caloring값, date 값 쌓임.
 
@@ -86,7 +92,7 @@ public class CaloringController {
         initVO.updateTotalCalor();
         userRepository.updateCalor(initVO);
         alarmRepository.savePenalAlarm(initVO);
-        return new ResponseEntity<>(new ResponseVO("success : update penalty success"),HttpStatus.OK);
+        return new ResponseEntity<>(initVO , HttpStatus.OK);
     }
 
 

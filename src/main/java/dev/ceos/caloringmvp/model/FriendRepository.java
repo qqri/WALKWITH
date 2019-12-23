@@ -20,5 +20,6 @@ public interface FriendRepository {
 
     Friend findById(long user_id);
 
+
     UserTwoVO aleadyCheck(UserTwoVO userTwoVO);
 }

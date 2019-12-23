@@ -26,9 +26,7 @@ public interface UserRepository {
 
     void updateExer(UserExerVO userExerVO);
 
-    void attackFriend(FriendAttackVO friendAttackVO);
-
-    void attack(int attackCaloring, long user_id);
+    void attacked(FriendAttackVO friendAttackVO);
 
     User loginUser(UserInfoVO userInfoVO);
 

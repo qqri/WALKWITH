@@ -23,7 +23,7 @@ public class User {
     @Column
     private int level;
     @Column
-    private int attack_caloring;
+    private int attacked_caloring;
     @Column
     private int total_caloring;
     @Column

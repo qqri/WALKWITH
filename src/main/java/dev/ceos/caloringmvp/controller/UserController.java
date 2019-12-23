@@ -54,7 +54,7 @@ public class UserController {
         User loginUser = userRepository.loginCheck(user);
 
         if(loginUser == null) {
-            return ResponseEntity.ok("warning :  name,pw  incorrect ");
+            return new ResponseEntity<>(new ResponseVO("warning : id, pw incrrect"),HttpStatus.OK);
         }
         return new ResponseEntity<>(loginUser,HttpStatus.OK);
     }
@@ -69,7 +69,8 @@ public class UserController {
     @PostMapping("/alarm/show")
     public ResponseEntity<?> alarmShow(@RequestBody UserInfoVO userInfoVO){
 
-        List<Alarm> alarmList = alarmRepository.findAlarmList(userInfoVO);
+        List<AlarmVO> alarmList = alarmRepository.findAlarmList(userInfoVO);
+
 
         ListResponseVO listResponseVO = new ListResponseVO();
         listResponseVO.setResponse(alarmList);
