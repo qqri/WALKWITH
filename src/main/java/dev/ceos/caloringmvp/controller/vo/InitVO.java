@@ -8,27 +8,36 @@ import java.sql.Date;
 public class InitVO {
     public InitVO() { }
 
-    public InitVO(long user_id ,int exercising,int total_caloring,int attacked_caloring,int level)
+    public InitVO(long user_id ,int exercising,int total_caloring,int attacked_caloring,int level,int penalty)
     {
         this.user_id=user_id;
         this.exercising=exercising;
         this.total_caloring=total_caloring;
         this.attacked_caloring=attacked_caloring;
         this.level = level;
+        this.penalty=penalty;
     }
 
     public void updateTotalCalor(){
-        if(exercising<100) {
-            if(attacked_caloring<exercising) //받은공격량 < 운동량 -> 공격량은 안깎임. 패널티 받음
-                total_caloring = total_caloring -(100-exercising);
-            else //받은공격량 > 내 운동량인 경우 -> 공격량도 깎임. 패널티 받음. 운동량 한번 더 더해줌
-                total_caloring = total_caloring - (attacked_caloring - (100-exercising)) +exercising;
+        int pre = total_caloring;
 
-            if(total_caloring<0) { total_caloring=0; } //레벨1인 유저의 누적 칼로링이 음수가 되지 않도록 해줌.
+        if(exercising<100) {
+            if(attacked_caloring<exercising) {//받은공격량 < 운동량 -> 공격량은 안깎임. 패널티 받음
+                total_caloring = total_caloring - (100 - exercising);
+                penalty=100-exercising;
+            }
+            else {//받은공격량 > 내 운동량인 경우 -> 공격량도 깎임. 패널티 받음. 운동량 한번 더 더해줌
+                total_caloring = total_caloring - (attacked_caloring + (100 - exercising)) + exercising;
+                penalty= attacked_caloring + (100 - exercising)-exercising;
+            }
+
         }
 
         // 본인레벨보다 밑 구간 으로 안가게함.
-        if(total_caloring < (level-1)*200) total_caloring=level*200;
+        if(total_caloring < (level-1)*200) {
+            total_caloring=(level-1)*200;
+            penalty = pre-total_caloring;
+        }
 
         //공격량은 다시 초기화
         attacked_caloring=0;
@@ -50,7 +59,7 @@ public class InitVO {
     *
     * T3 :()
     *         2   /    250      /   20   /  50          ->           2   /     250- (패널티:100-20) - (공격:50) + (보완?: 20)
-    *                                                                        == 250 - 60 ==>> 200 (자기 구간보단 안떨어지니까)
+    *                                                                        == 250 -110 ==>> 200 (자기 구간보단 안떨어지니까)
     *
     * */
 
@@ -65,4 +74,5 @@ public class InitVO {
     private int attacked_caloring;
     @Column
     private int level;
+    private int penalty;
 }

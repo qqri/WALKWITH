@@ -21,6 +21,10 @@ public interface UserRepository {
 
     UserExerVO findById2(UserExerVO userExerVO);
 
+    InitVO findById3(UserInfoVO userInfoVO);
+
+
+
 
     User loginCheck(User user);
 

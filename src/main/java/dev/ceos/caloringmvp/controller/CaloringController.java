@@ -61,6 +61,8 @@ public class CaloringController {
         if(check != null) //알람이 이미 존재하는지 확인함. > null 이 아니란건 이미 존재한단 거니까 끝내버림
         { return  new ResponseEntity<>(new ResponseVO("warning : already attack"),HttpStatus.OK); }
 
+        alarmRepository.saveAttackAlarm(friendAttackVO); //일단 알람에는 누가 공격했다고 뜸.
+
         long friend_user_id = friendAttackVO.getFriend_user_id();
         User attackCheck = userRepository.findById(friend_user_id);
 
@@ -68,11 +70,12 @@ public class CaloringController {
             return new ResponseEntity<>(new ResponseVO("warning : attack caloring over 150"),HttpStatus.OK);
         }
 
+        //아직은 150이 넘지 않지만 , 나중에 150이 넘게 되는 경우
         else if(friendAttackVO.getExercising() + attackCheck.getAttacked_caloring() >= 150 )
         {friendAttackVO.setExercising( 150-attackCheck.getAttacked_caloring() ); }
 
         userRepository.attacked(friendAttackVO);
-        alarmRepository.saveAttackAlarm(friendAttackVO);
+
         //alarm 테이블에 event code, my_id, you_id, caloring값, date 값 쌓임.
 
         return new ResponseEntity<>(new ResponseVO("success : attack success"),HttpStatus.OK);
@@ -85,13 +88,15 @@ public class CaloringController {
     * 패널티 생기는 경우 - > 이거 전날 받아온 (100-운동량) 만큼
     * total caloring 깎인
     */
-    @PatchMapping("exercising/penalty")
-    public ResponseEntity<?> initToday(@RequestBody InitVO initVO){
-        //total 값 업뎃, > InitVO
-        //userRepo 에서 Init 에 있는 id 값이랑 해서 update 시킴
+    @PostMapping("init/today/penalty")
+    public ResponseEntity<?> initToday(@RequestBody UserInfoVO userInfoVO){
+
+        InitVO initVO = userRepository.findById3(userInfoVO);
         initVO.updateTotalCalor();
+
         userRepository.updateCalor(initVO);
         alarmRepository.savePenalAlarm(initVO);
+
         return new ResponseEntity<>(initVO , HttpStatus.OK);
     }
 
