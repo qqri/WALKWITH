@@ -9,7 +9,7 @@
         insert into alarm
         (event,user_id,friend_user_id,caloring,updateAt)
         values
-        (2,#{friend_user_id},#{user_id},#{exercising},now())
+        (2,#{friend_user_id},#{user_id},#{exercising},#{updateAt})
     </insert>
     <insert id="savePenalAlarm">
         insert into alarm

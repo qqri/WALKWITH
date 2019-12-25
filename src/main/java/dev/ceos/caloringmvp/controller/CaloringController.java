@@ -58,15 +58,22 @@ public class CaloringController {
     public ResponseEntity<?> attackFriend(@RequestBody FriendAttackVO friendAttackVO){
 
         Alarm check = alarmRepository.findByAlarmId(friendAttackVO);
-        if(check != null) //알람이 이미 존재하는지 확인함. > null 이 아니란건 이미 존재한단 거니까 끝내버림
-        { return  new ResponseEntity<>(new ResponseVO("warning : already attack"),HttpStatus.OK); }
-
+        if(check != null) //알람이 이미 존재하는지 확인함. > null 이 아니란건 이미 존재한단 거니까 끝내버림 > 이 경우엔 아예 공격갔다는 말도 안뜸
+        {
+            return  new ResponseEntity<>(new ResponseVO("warning : already attack"),HttpStatus.OK);
+        }
+        /*
+        * int checkEx=friendAttackVO.getExercising();
+        * if(checkEx==0)
+        * {return new ResponseEntity<>(new ResponseVO("warning : user can just attack 0"),HttpStatus.OK);}
+        * */
         alarmRepository.saveAttackAlarm(friendAttackVO); //일단 알람에는 누가 공격했다고 뜸.
 
         long friend_user_id = friendAttackVO.getFriend_user_id();
         User attackCheck = userRepository.findById(friend_user_id);
+        int overeAttackCheck =attackCheck.getAttacked_caloring();
 
-        if(attackCheck.getAttacked_caloring()>150) { //이미 공격 받은게 150 인거
+        if(overeAttackCheck>=150) { //이미 공격 받은게 150 인거
             return new ResponseEntity<>(new ResponseVO("warning : attack caloring over 150"),HttpStatus.OK);
         }
 
