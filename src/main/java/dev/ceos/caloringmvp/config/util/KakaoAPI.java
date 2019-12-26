@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-/*
+
 @Service
 public class KakaoAPI {
 
@@ -34,8 +34,8 @@ public class KakaoAPI {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=8957674e13342897135e3326bc0a4e57");
-            sb.append("&redirect_uri=http://13.124.85.168:8080/login");
+            sb.append("&client_id=**");
+            sb.append("&redirect_uri=**");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
@@ -77,7 +77,7 @@ public class KakaoAPI {
 
         //    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
         HashMap<String, Object> userInfo = new HashMap<>();
-        String reqURL = "https://kapi.kakao.com/v2/user/me";
+        String reqURL = "**";
         try {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -149,4 +149,3 @@ public class KakaoAPI {
 
 
 }
-*/

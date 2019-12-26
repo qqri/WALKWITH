@@ -1,5 +1,5 @@
 package dev.ceos.caloringmvp.config;
-/*
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,4 +15,3 @@ public class ErrorInfo {
     this.ex = ex.getLocalizedMessage();
   }
 }
-*/

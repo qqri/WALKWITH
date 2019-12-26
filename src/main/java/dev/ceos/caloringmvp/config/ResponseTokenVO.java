@@ -1,5 +1,5 @@
-/*
-package dev.ceos.caloringmvp.controller.vo;
+
+package dev.ceos.caloringmvp.config;
 
 import lombok.Data;
 
@@ -14,4 +14,3 @@ public class ResponseTokenVO {
     }
     public ResponseTokenVO(){ }
 }
-*/

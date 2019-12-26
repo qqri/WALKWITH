@@ -1,10 +1,11 @@
 
-//package dev.ceos.caloringmvp.config;
+package dev.ceos.caloringmvp.config;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Map;
 
-/*
+
 @Slf4j
 public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 
@@ -54,4 +55,3 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
     return true;
   }
 }
-*/

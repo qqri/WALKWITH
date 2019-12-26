@@ -1,8 +1,8 @@
 package dev.ceos.caloringmvp.config;
-/*
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import dev.ceos.caloringmvp.controller.vo.ResponseTokenVO;
+import dev.ceos.caloringmvp.config.ResponseTokenVO;
 import dev.ceos.caloringmvp.model.User;
 import dev.ceos.caloringmvp.model.UserRepository;
 import dev.ceos.caloringmvp.config.util.KakaoAPI;
@@ -26,7 +26,7 @@ public class kakaoLoginController {
     @Autowired
     UserRepository userRepository;
 
-    @RequestMapping(value="/")
+    @RequestMapping(value = "/")
     public String index() {
 
         return "index";
@@ -81,9 +81,9 @@ public class kakaoLoginController {
     }
 
 
-    @RequestMapping(value="/logout")
+    @RequestMapping(value = "/logout")
     public String logout(HttpSession session) {
-        kakao.kakaoLogout((String)session.getAttribute("access_Token"));
+        kakao.kakaoLogout((String) session.getAttribute("access_Token"));
         session.removeAttribute("access_Token");
         session.removeAttribute("userId");
         session.invalidate();
@@ -91,7 +91,4 @@ public class kakaoLoginController {
     }
 
 
-
-
 }
-*/
