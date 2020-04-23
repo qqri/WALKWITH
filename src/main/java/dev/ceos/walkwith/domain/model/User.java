@@ -3,7 +3,9 @@ package dev.ceos.caloringmvp.model;
 import lombok.Data;
 import java.sql.Date;
 import javax.persistence.*;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +31,7 @@ public class User {
     @Column
     private int exercising;
 
-    public User() {}
+
     public int updateTodayCalor(){
         int pre = total_caloring;
         int penalty=0;

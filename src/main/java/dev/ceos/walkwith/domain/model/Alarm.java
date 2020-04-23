@@ -2,10 +2,14 @@ package dev.ceos.caloringmvp.model;
 import lombok.Data;
 import javax.persistence.*;
 import java.sql.Date;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 public class Alarm {
-    @Id @GeneratedValue
+
+    @Id
+    @GeneratedValue
     private long friend_user_id;
 
     @Column
