@@ -1,4 +1,4 @@
-package dev.ceos.caloringmvp;
+package dev.ceos.walkwith;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -11,12 +11,12 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 
-@MapperScan(value = {"dev.ceos.caloringmvp"})
+@MapperScan(value = {"dev.ceos.walkwith"})
 @SpringBootApplication
-public class CaloringmvpApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(CaloringmvpApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 

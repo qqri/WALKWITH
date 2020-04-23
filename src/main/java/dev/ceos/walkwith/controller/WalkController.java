@@ -1,4 +1,4 @@
-package dev.ceos.caloringmvp.controller;
+package dev.ceos.walkwith.controller;
 
 
 import dev.ceos.caloringmvp.controller.vo.*;
