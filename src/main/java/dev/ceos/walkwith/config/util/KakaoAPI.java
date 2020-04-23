@@ -1,4 +1,4 @@
-package dev.ceos.caloringmvp.config.util;
+package dev.ceos.walkwith.config.util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;

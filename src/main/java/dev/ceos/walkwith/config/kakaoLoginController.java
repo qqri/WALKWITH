@@ -1,4 +1,4 @@
-package dev.ceos.caloringmvp.config;
+package dev.ceos.walkwith.config;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

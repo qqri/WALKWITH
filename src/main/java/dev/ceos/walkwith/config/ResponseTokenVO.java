@@ -1,5 +1,5 @@
 
-package dev.ceos.caloringmvp.config;
+package dev.ceos.walkwith.config;
 
 import lombok.Data;
 
