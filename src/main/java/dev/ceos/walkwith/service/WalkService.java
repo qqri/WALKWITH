@@ -64,13 +64,11 @@ public class WalkService {
         if(overeAttackCheck>=150) { //이미 공격 받은게 150 인거
             return new ResponseVO("warning : attack caloring over 150");
         }
-
         //아직은 150이 넘지 않지만 , 나중에 150이 넘게 되는 경우
         else if(friendAttackVO.getExercising() + attackCheck.getAttacked_caloring() >= 150 )
         {friendAttackVO.setExercising( 150-attackCheck.getAttacked_caloring() ); }
 
         userRepository.attacked(friendAttackVO);
-
         //alarm 테이블에 event code, my_id, you_id, caloring값, date 값 쌓임.
         return new ResponseVO("success : attack success");
     }
