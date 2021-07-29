@@ -1,4 +1,3 @@
-
 package dev.ceos.walkwith.config;
 
 import com.auth0.jwt.JWT;
